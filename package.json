@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  },
+  "name": "@krauters/typescript-core",
+  "description": "A TypeScript Repository that stands as a starting point for all other TypeScript repositories.",
+  "version": "0.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo 'no tests'"
+  },
+  "keywords": [
+    "typescript",
+    "core",
+    "template",
+    "base"
+  ],
+  "author": "Colten Krauter <coltenkrauter>",
+  "license": "MIT"
+}

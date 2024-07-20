@@ -8,8 +8,10 @@ console.debug(`Current directory [${__dirname}]`)
 
 const packageJsonPath = join(__dirname, '../package.json')
 const readmePath = join(__dirname, '../README.md')
-const firstMarkdownTitleRegex = /^# (.+)$/m
 const packageNameScopeRegex = /^@.*\//
+
+// Heading level regex constants
+const h1HeadingRegex = /^# (.+)$/m
 
 /**
  * Converts a package name to a formatted title.
@@ -56,21 +58,54 @@ const writeReadme = (readmePath, content) => {
 	console.info(`README.md updated successfully at [${readmePath}]`)
 }
 
+/**
+ * Ensures the specified section exists in the README content.
+ * @param {string} content - The README content.
+ * @param {string} sectionTitle - The section title to ensure exists.
+ * @returns {string} - The updated README content.
+ */
+const ensureSectionExists = (content, sectionTitle) => {
+	const sectionRegex = new RegExp(`^## ${sectionTitle}$`, 'm')
+	if (!sectionRegex.test(content)) {
+		console.info(`[${sectionTitle}] section not found, adding it to README.md`)
+		content += `\n\n## ${sectionTitle}\n\n`
+	}
+	return content
+}
+
+/**
+ * Ensures the title exists in the README content and updates it if necessary.
+ * @param {string} content - The README content.
+ * @param {RegExp} titleRegex - The regex to match the title.
+ * @param {string} newTitle - The new title to set.
+ * @returns {string} - The updated README content.
+ */
+const ensureTitleExists = (content, titleRegex, newTitle) => {
+	const currentTitleMatch = content.match(titleRegex)
+	const currentTitle = currentTitleMatch ? currentTitleMatch[1] : ''
+	console.info(`Current README title [${currentTitle}]`)
+
+	if (currentTitle !== newTitle) {
+		content = content.replace(titleRegex, `# ${newTitle}`)
+		console.info(`README.md title updated to [${newTitle}]`)
+	}
+	return content
+}
+
 try {
 	const packageJson = readPackageJson(packageJsonPath)
 	const packageName = packageJson.name
 	const desiredTitle = packageNameToTitle(packageName)
-	const readmeContent = readReadme(readmePath)
+	let readmeContent = readReadme(readmePath)
 
-	const currentTitleMatch = readmeContent.match(firstMarkdownTitleRegex)
-	const currentTitle = currentTitleMatch ? currentTitleMatch[1] : ''
-	console.info(`Current README title [${currentTitle}]`)
+	readmeContent = ensureTitleExists(readmeContent, h1HeadingRegex, desiredTitle)
 
-	if (currentTitle !== desiredTitle) {
-		const updatedContent = readmeContent.replace(firstMarkdownTitleRegex, `# ${desiredTitle}`)
-		writeReadme(readmePath, updatedContent)
-		console.info(`README.md title updated to [${desiredTitle}]`)
-	}
+	const sections = ['Usage', 'Collaboration', 'Development']
+	sections.forEach(section => {
+		readmeContent = ensureSectionExists(readmeContent, section)
+	})
+
+	writeReadme(readmePath, readmeContent)
 } catch (error) {
 	console.error(`Failed with error [${error}]`)
 }

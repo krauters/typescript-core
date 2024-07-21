@@ -1,0 +1,12 @@
+name: Node Release
+
+on:
+  push:
+    branches: '*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    uses: krauters/shared-workflows/.github/workflows/node-release.yaml@main
+    secrets:
+      GH_TOKEN_RELEASES: ${{ secrets.GH_TOKEN_RELEASES }}

@@ -13,6 +13,14 @@
     "target": "ESNext", // Latest ECMAScript target
     "types": ["mocha", "node"] // Type definitions for Mocha and Node
   },
-  "exclude": ["node_modules"], // Exclude node_modules directory
-  "include": ["src/**/*.{ts,tsx}", "test/**/*.{ts,tsx}"] // Include source and test files
+  "exclude": ["node_modules"],
+  "include": [
+    "*.ts",
+    "examples/**/*.ts",
+    "examples/**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "test/**/*.ts",
+    "test/**/*.tsx",
+  ],
 }

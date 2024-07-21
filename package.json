@@ -1,6 +1,14 @@
 {
 	"devDependencies": {
+		"@types/chai": "^4.3.16",
+		"@types/mocha": "^10.0.7",
+		"@types/sinon": "^17.0.3",
+		"c8": "^10.1.2",
+		"chai": "^5.1.1",
 		"husky": "^9.1.1",
+		"mocha": "^10.7.0",
+		"sinon": "^18.0.0",
+		"ts-node": "^10.9.2",
 		"typescript": "^5.5.3"
 	},
 	"name": "@krauters/typescript-core",
@@ -9,9 +17,11 @@
 	"main": "index.ts",
 	"type": "module",
 	"scripts": {
-		"test": "echo 'no tests'",
+		"mocha": "c8 --config test/c8.config.json mocha --config test/.mocharc.json",
+		"prepare": "husky || true",
 		"readme": "node scripts/readme.js",
-		"prepare": "husky || true"
+		"test": "npm run mocha",
+		"update-all": "npx npm-check-updates -u && npm install"
 	},
 	"keywords": [
 		"typescript",

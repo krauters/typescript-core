@@ -1,0 +1,8 @@
+{
+  "require": ["ts-node/register/transpile-only"],
+  "loader": "ts-node/esm",
+  "extension": ["ts", "tsx"],
+  "spec": "test/**/*.test.{ts,tsx}",
+  "timeout": 5000,
+  "reporter": "spec"
+}

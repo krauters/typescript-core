@@ -1,0 +1,12 @@
+{
+    "all": true,
+    "extension": [".ts", ".tsx"],
+    "include": ["src/**/*.{ts,tsx}"],
+    "exclude": ["test/**/*.{ts,tsx}"],
+    "reporter": ["json", "text"],
+    "report-dir": "./coverage",
+    "lines": 60,
+    "statements": 60,
+    "functions": 60,
+    "branches": 60
+}

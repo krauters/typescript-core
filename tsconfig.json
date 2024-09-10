@@ -7,7 +7,7 @@
     "moduleResolution": "node", // Node module resolution strategy
     "outDir": "./dist", // Output directory for compiled files
     "resolveJsonModule": true, // Include modules imported with .json extension
-    "rootDir": "./src", // Root directory for source files
+    "rootDir": "./", // Root directory for source files
     "skipLibCheck": true, // Skip type checking of declaration files
     "strict": true, // Enable all strict type-checking options
     "target": "ESNext", // Latest ECMAScript target
@@ -21,6 +21,6 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "test/**/*.ts",
-    "test/**/*.tsx",
+    "test/**/*.tsx"
   ],
 }

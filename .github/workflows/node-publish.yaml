@@ -1,5 +1,5 @@
 name: Node Publish
-run-name: Node Publish [${{ github.ref_name }}] triggered by [${{ github.event_name }}/${{ github.actor }}]
+run-name: '[${{ github.ref_name }}] triggered by [${{ github.event_name }}/${{ github.actor }}]'
 
 on:
   release:

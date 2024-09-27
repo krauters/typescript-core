@@ -16,6 +16,8 @@
   "exclude": ["node_modules"],
   "include": [
     "*.ts",
+    "*.js",
+    "scripts/*.js",
     "examples/**/*.ts",
     "examples/**/*.tsx",
     "src/**/*.ts",

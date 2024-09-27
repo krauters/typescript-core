@@ -1,14 +1,14 @@
 {
 	"name": "@krauters/typescript-core",
 	"description": "A TypeScript Repository that stands as a starting point for all other TypeScript repositories.",
-	"version": "0.3.0",
+	"version": "0.4.0",
 	"main": "app.ts",
 	"type": "module",
 	"scripts": {
 		"build": "npm run ts-node -- ./src/app.ts",
 		"example-1": "npm run ts-node -- ./example/1.ts",
 		"fix": "npm run lint -- --fix",
-		"lint": "npx eslint src/**",
+		"lint": "npx eslint src/** scripts/**",
 		"mocha": "c8 --config test/c8.config.json mocha --config test/.mocharc.json",
 		"prepare": "husky || true",
 		"readme": "node scripts/readme.js",
@@ -26,18 +26,18 @@
 	"author": "Colten Krauter <coltenkrauter>",
 	"license": "ISC",
 	"devDependencies": {
-		"@krauters/eslint-config": "^0.1.0",
-		"@types/chai": "^4.3.19",
-		"@types/mocha": "^10.0.7",
+		"@krauters/eslint-config": "^0.6.0",
+		"@types/chai": "^5.0.0",
+		"@types/mocha": "^10.0.8",
 		"@types/sinon": "^17.0.3",
 		"c8": "^10.1.2",
 		"chai": "^5.1.1",
-		"husky": "^9.1.5",
+		"husky": "^9.1.6",
 		"mocha": "^10.7.3",
-		"nodemon": "^3.1.4",
-		"sinon": "^18.0.0",
+		"nodemon": "^3.1.7",
+		"sinon": "^19.0.2",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.6.2",
-		"typescript-eslint": "^8.5.0"
+		"typescript-eslint": "^8.7.0"
 	}
 }

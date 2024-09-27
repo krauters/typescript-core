@@ -1,13 +1,15 @@
+/* eslint-disable no-undef */
+
 import { readFileSync, writeFileSync } from 'fs'
-import { join, dirname } from 'path'
+import { join, dirname as pathDirname } from 'path'
 import { fileURLToPath } from 'url'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-console.debug(`Current directory [${__dirname}]`)
+const filename = fileURLToPath(import.meta.url)
+const dirname = pathDirname(filename)
+console.debug(`Current directory [${dirname}]`)
 
-const packageJsonPath = join(__dirname, '../package.json')
-const readmePath = join(__dirname, '../README.md')
+const packageJsonPath = join(dirname, '../package.json')
+const readmePath = join(dirname, '../README.md')
 const packageNameScopeRegex = /^@.*\//
 
 // Heading level regex constants
@@ -20,9 +22,10 @@ const h1HeadingRegex = /^# (.+)$/m
  */
 const packageNameToTitle = (packageName) => {
 	const nameWithoutScope = packageName.replace(packageNameScopeRegex, '')
+
 	return nameWithoutScope
 		.split('-')
-		.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(' ')
 }
 
@@ -35,6 +38,8 @@ const readPackageJson = (packageJsonPath) => {
 	console.debug(`Reading package.json from [${packageJsonPath}]...`)
 	const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'))
 	console.info(`Extracted package name [${packageJson.name}]`)
+
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return packageJson
 }
 
@@ -45,6 +50,7 @@ const readPackageJson = (packageJsonPath) => {
  */
 const readReadme = (readmePath) => {
 	console.debug(`Reading README.md from [${readmePath}]...`)
+
 	return readFileSync(readmePath, 'utf8')
 }
 
@@ -70,6 +76,7 @@ const ensureSectionExists = (content, sectionTitle) => {
 		console.info(`[${sectionTitle}] section not found, adding it to README.md`)
 		content += `\n\n## ${sectionTitle}\n\n`
 	}
+
 	return content
 }
 
@@ -89,19 +96,21 @@ const ensureTitleExists = (content, titleRegex, newTitle) => {
 		content = content.replace(titleRegex, `# ${newTitle}`)
 		console.info(`README.md title updated to [${newTitle}]`)
 	}
+
 	return content
 }
 
 try {
 	const packageJson = readPackageJson(packageJsonPath)
 	const packageName = packageJson.name
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 	const desiredTitle = packageNameToTitle(packageName)
 	let readmeContent = readReadme(readmePath)
 
 	readmeContent = ensureTitleExists(readmeContent, h1HeadingRegex, desiredTitle)
 
 	const sections = ['Usage', 'Collaboration', 'Development']
-	sections.forEach(section => {
+	sections.forEach((section) => {
 		readmeContent = ensureSectionExists(readmeContent, section)
 	})
 

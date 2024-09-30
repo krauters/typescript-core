@@ -20,8 +20,3 @@ dev.env
 .env
 .env.local
 .env.*.local
-
-# Generated files
-*.js
-*.jsx
-*.map

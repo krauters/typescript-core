@@ -1,5 +1,5 @@
 name: Node Publish
-run-name: '[${{ github.ref_name }}] triggered by [${{ github.event_name }}/${{ github.actor }}]'
+run-name: Node Publish [${{ github.ref_name }}] triggered by [${{ github.event_name }}/${{ github.actor }}]
 
 on:
   release:
@@ -14,4 +14,5 @@ jobs:
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
     with:
+      node_install: true
       dry_run: ${{ github.event_name != 'release' }}
